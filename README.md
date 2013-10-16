@@ -39,6 +39,8 @@ MIT
 
 ## Inception
 
+Inspired by https://github.com/darach/beam-js
+
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/SimpleBeams) and submit
