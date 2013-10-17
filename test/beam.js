@@ -25,6 +25,7 @@ exports['create beam with filter and reject simple message'] = function (test) {
     test.equal(counter, 0);
 }
 
+/*
 exports['throw invalid arguments in none'] = function (test) {
     test.throws(
         function () {
@@ -35,3 +36,4 @@ exports['throw invalid arguments in none'] = function (test) {
         }
     );
 }
+*/
