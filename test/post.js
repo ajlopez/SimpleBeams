@@ -36,28 +36,19 @@ exports['pipe to beams'] = function (test) {
 }
 
 exports['pipe beams using next'] = function (test) {
-    var result = null;
+    test.async();
     
     var beam = sb.createBeam();
-    beam.pipe(function (x) { return x % 2 == 0; }).pipe(function (x, next) { next.send(x / 2); }).pipe(function (x) { result = x });
+    beam.pipe(function (x) { return x % 2 == 0; }).pipe(function (x, next) { next.send(x / 2); }).pipe(function (x) { test.equal(x, 1); test.done(); });
     
     beam.post(2);
-    setImmediate(function () {
-        test.equal(result, 1);
-        test.done();
-    });
 }
 
 exports['pipe beams using next with post'] = function (test) {
-    var result = null;
+    test.async();
     
     var beam = sb.createBeam();
-    beam.pipe(function (x) { return x % 2 == 0; }).pipe(function (x, next) { next.post(x / 2); }).pipe(function (x) { result = x });
+    beam.pipe(function (x) { return x % 2 == 0; }).pipe(function (x, next) { next.post(x / 2); }).pipe(function (x) { test.equal(x, 1); test.done(); });
     
     beam.post(2);
-    
-    setTimeout(function () {
-        test.equal(result, 1);
-        test.done();
-    }, 200);
 }
