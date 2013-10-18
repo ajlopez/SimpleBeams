@@ -26,7 +26,7 @@ exports['pipe to beams'] = function (test) {
     test.equal(counter, 6);
 }
 
-exports['pipe beams using next'] = function (test) {
+exports['pipe beams using next.send'] = function (test) {
     var result = null;
     
     var beam = sb.createBeam();
@@ -36,4 +36,12 @@ exports['pipe beams using next'] = function (test) {
     test.equal(result, null);
     beam.send(2);
     test.equal(result, 1);
+}
+
+exports['pipe beams using next.post'] = function (test) {
+    test.async();
+    
+    var beam = sb.createBeam();
+    beam.pipe(function (x) { return x % 2 == 0; }).pipe(function (x, next) { next.post(x / 2); }).pipe(function (x) { test.equal(x, 1); test.done(); });
+    beam.send(2);
 }
